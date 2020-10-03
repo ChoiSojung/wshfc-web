@@ -3,54 +3,26 @@ extends layout
 block content
   .row.banner
     .col-12
-      h1 WSHFC
-        small &nbsp;Click through each program to learn more!
+      h1=pageHeader.title
+        small &nbsp;#{pageHeader.strapline}
 
   .row
     .col-12.col-md-8
-      .card
-        .card-block
-          h4
-            a(href='/program') 9% LIHTC
-            small &nbsp;
-              i.fas.fa-star
-              i.fas.fa-star
-              i.fas.fa-star
-              i.far.fa-star
-              i.far.fa-star
-            span.badge.badge-pill.badge-default.float-right Ask
-          p.address 1000 Second Ave, Suite 2700
-          p.facilities
-            span.badge.badge-warning 9% subsidy
-      .card
-        .card-block
-          h4
-            a(href='/program') 4% LIHTC
-            small &nbsp;
-              i.fas.fa-star
-              i.fas.fa-star
-              i.fas.fa-star
-              i.far.fa-star
-              i.far.fa-star
-            span.badge.badge-pill.badge-default.float-right Ask
-          p.address 1000 Second Ave, Suite 2700
-          p.facilities
-            span.badge.badge-warning 4% subsidy
-
-            .card
-              .card-block
-                h4
-                  a(href='/program') 4% LIHTC
-                  small &nbsp;
-                    i.fas.fa-star
-                    i.fas.fa-star
-                    i.fas.fa-star
-                    i.far.fa-star
-                    i.far.fa-star
-                  span.badge.badge-pill.badge-default.float-right Ask
-                p.address 1000 Second Ave, Suite 2700
-                p.facilities
-                  span.badge.badge-warning 4% subsidy
+      each program in programs
+        .card
+          .card-block
+            h4
+              a(href="/program")=program.name
+              small &nbsp;
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+                i.fas.fa-star
+              span.badge.badge-pill.badge-default.float-right= program.distance
+            p.address=program.address
+            .facilities
+              span.badge.badge-warning=facility
 
     .col-12.col-md-4
-      p.lead Making affordable homes and healthy communities a reality for everyone.
+      p.lead=sidebar
