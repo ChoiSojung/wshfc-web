@@ -1,20 +1,28 @@
 const mongoose = require('mongoose');
-const dbURI = 'mongodb://localhost/wshfc-web';
-mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true });
+const {MongoClient}=require('mongodb');
 
-mongoose.connection.on('connected', ()=>{
-  console.log(`Mongoose connected to ${dbURI}`);
-});
-mongoose.connection.on('error', err=>{
-  console.log('Mongoose connection error:', err);
-});
-mongoose.connection.on('disconnected', ()=>{
-  console.log('Mongoose disconnected');
-});
+const dbURI = 'mongodb+srv://sojung_choi:XhX1jKQX4Qa325WV@cluster0.c7bsg.mongodb.net/<dbname>?retryWrites=true&w=majority';
+const client = new MongoClient(dbURI, {useUnifiedTopology:true});
+
+client.connect();
+
+
+// mongoose.connect(dbURI, {useNewUrlParser: true, useUnifiedTopology:true });
+//
+// mongoose.connection.on('connected', ()=>{
+//   console.log(`Mongoose connected to ${dbURI}`);
+// });
+// mongoose.connection.on('error', err=>{
+//   console.log('Mongoose connection error:', err);
+// });
+// mongoose.connection.on('disconnected', ()=>{
+//   console.log('Mongoose disconnected');
+// });
+//
 
 const gracefulShutdown = (msg, callback)=> {
-  mongoose.connection.close( ()=>{
-    console.log(`Mongoose disconnected through ${msg}`);
+    client.close( ()=>{
+    console.log(`Mongo disconnected through ${msg}`);
     callback();
   });
 };
